@@ -20,8 +20,8 @@ app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://aura-ecommerce-app.vercel.app",
-  "https://admin-aura-ecommerce-app.vercel.app",
+  "https://aurawebsite-eight.vercel.app",
+  "https://aura-website-2z55.vercel.app",
   process.env.CLIENT_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
