@@ -1,0 +1,23 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/auth/verify-email",
+      "destination": "https://backend-aura-ecommerce-app.vercel.app/api/auth/verify-email"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://backend-aura-ecommerce-app.vercel.app/api/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        { "key": "access-control-allow-credentials", "value": "true" },
+        { "key": "access-control-allow-origin", "value": "https://aura-ecommerce-app.vercel.app" },
+        { "key": "access-control-allow-methods", "value": "GET, POST, PUT, DELETE, OPTIONS, PATCH" },
+        { "key": "access-control-allow-headers", "value": "Content-Type, Authorization, Cookie, token" }
+      ]
+    }
+  ]
+}
