@@ -1,23 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/api/auth/verify-email",
-      "destination": "https://aura-website-sable.vercel.app/api/auth/verify-email"
+      "source": "/api/(.*)",
+      "destination": "https://aura-website-sable.vercel.app/api/$1"
     },
     {
-      "source": "/api/:path*",
-      "destination": "https://aura-website-sable.vercel.app/api/:path*"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/api/:path*",
-      "headers": [
-        { "key": "access-control-allow-credentials", "value": "true" },
-        { "key": "access-control-allow-origin", "value": "https://aurawebsite-eight.vercel.app" },
-        { "key": "access-control-allow-methods", "value": "GET, POST, PUT, DELETE, OPTIONS, PATCH" },
-        { "key": "access-control-allow-headers", "value": "Content-Type, Authorization, Cookie, token" }
-      ]
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
+
