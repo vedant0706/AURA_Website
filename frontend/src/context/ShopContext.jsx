@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Create ShopContext for global state management
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
@@ -25,6 +26,7 @@ const ShopContextProvider = (props) => {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Axios instance for all API calls (withCredentials for cookies)
   const axiosInstance = axios.create({
     baseURL: backendUrl,
     withCredentials: true,
@@ -33,8 +35,7 @@ const ShopContextProvider = (props) => {
     },
   });
 
-  axios.defaults.withCredentials = true;
-
+  // Request interceptor (can add auth tokens if needed in future)
   axiosInstance.interceptors.request.use(
     (config) => {
       return config;
@@ -44,6 +45,7 @@ const ShopContextProvider = (props) => {
     }
   );
 
+  // Response interceptor (can handle global errors like token expiry)
   axiosInstance.interceptors.response.use(
     (response) => {
       return response;
@@ -53,6 +55,7 @@ const ShopContextProvider = (props) => {
     }
   );
 
+  // Check auth status on load or after login/register
   const checkAuthStatus = async () => {
     try {
       setIsLoading(true);
@@ -76,6 +79,7 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Fetch user profile data after auth
   const getUserData = async () => {
     try {
       const { data } = await axiosInstance.get("/api/auth/data", {
@@ -92,6 +96,7 @@ const ShopContextProvider = (props) => {
     } catch (error) {}
   };
 
+  // Handle successful registration: check auth & redirect
   const handleRegistrationSuccess = async () => {
     await new Promise((resolve) => setTimeout(resolve, 200));
 
@@ -101,6 +106,7 @@ const ShopContextProvider = (props) => {
     navigate("/");
   };
 
+  // Handle successful login: check auth & redirect
   const handleLoginSuccess = async () => {
     await new Promise((resolve) => setTimeout(resolve, 200));
 
@@ -110,6 +116,7 @@ const ShopContextProvider = (props) => {
     navigate("/");
   };
 
+  // Logout user: clear state & redirect
   const handleLogout = async () => {
     try {
       await axiosInstance.post("/api/auth/logout");
@@ -125,8 +132,10 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Check if user is admin
   const isAdmin = userData?.role === "admin";
 
+  // Add item to cart (local + backend if logged in)
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Please select a size");
@@ -155,6 +164,7 @@ const ShopContextProvider = (props) => {
       } catch (error) {
         toast.error(error.response?.data?.message || "Failed to add to cart");
 
+        // Revert on error
         setCartItems(cartItems);
       }
     } else {
@@ -162,6 +172,7 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Update cart item quantity (local + backend if logged in)
   const updateCart = async (itemId, size, quantity) => {
     let cartData = structuredClone(cartItems);
 
@@ -185,11 +196,13 @@ const ShopContextProvider = (props) => {
         });
       } catch (error) {
         toast.error("Failed to update cart");
+        // Revert on error
         setCartItems(cartItems);
       }
     }
   };
 
+  // Calculate total cart item count
   const getCartCount = () => {
     let total = 0;
     for (const items in cartItems) {
@@ -204,6 +217,7 @@ const ShopContextProvider = (props) => {
     return total;
   };
 
+  // Calculate total cart amount (subtotal, without delivery)
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const id in cartItems) {
@@ -221,6 +235,7 @@ const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
+  // Fetch all products from backend
   const getProductsData = async () => {
     try {
       const { data } = await axiosInstance.get("/api/product/list");
@@ -234,6 +249,7 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Fetch user's saved cart from backend
   const getUserCart = async () => {
     if (!isLoggedin) return;
 
@@ -247,11 +263,13 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Initial load: fetch products & check auth
   useEffect(() => {
     getProductsData();
     checkAuthStatus();
   }, []);
 
+  // Context value object — all states & functions
   const value = {
     products,
     currency,
