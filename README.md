@@ -26,17 +26,17 @@ AURA is a **production-grade, full-stack e-commerce platform** engineered to dem
 ## 🛡️ Badges
 
 <p align="left">
-  <img src="https://img.shields.io/github/stars/vedant0706/AURA?style=flat-square" />
-  <img src="https://img.shields.io/github/forks/vedant0706/AURA?style=flat-square" />
-  <img src="https://img.shields.io/github/issues/vedant0706/AURA?style=flat-square" />
-  <img src="https://img.shields.io/github/pull-requests/vedant0706/AURA?style=flat-square" />
+  <img src="https://img.shields.io/github/stars/vedant0706/AURA_Website?style=flat-square" />
+  <img src="https://img.shields.io/github/forks/vedant0706/AURA_Website?style=flat-square" />
+  <img src="https://img.shields.io/github/issues/vedant0706/AURA_Website?style=flat-square" />
+  <img src="https://img.shields.io/github/pull-requests/vedant0706/AURA_Website?style=flat-square" />
   <img src="https://img.shields.io/badge/MERN-Full%20Stack-green?style=flat-square" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" />
 </p>
 
 ---
 
-## 🌟 Key Highlights (Recruiter-Focused)
+## 🌟 Key Highlights
 
 ### 🛒 End-User Capabilities
 
@@ -105,8 +105,8 @@ AURA is a **production-grade, full-stack e-commerce platform** engineered to dem
 Clone the repository:
 
 ```bash
-git clone https://github.com/vedant0706/AURA.git
-cd AURA
+git clone https://github.com/vedant0706/AURA_Website.git
+cd AURA_Website
 ```
 
 Install backend dependencies:
@@ -144,7 +144,7 @@ npm run dev
 ## 📁 Project Architecture
 
 ```bash
-AURA/
+AURA_WEBSITE/
 ├── client/
 │   ├── src/
 │   │   ├── assets/
